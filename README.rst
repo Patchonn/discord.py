@@ -18,7 +18,7 @@ Key Features
 
 - Modern Pythonic API using ``async`` and ``await``.
 - Proper rate limit handling.
-- 100% coverage of the supported Discord API.
+- Actual 100% coverage of the supported Discord API (as of writing this :^).
 - Optimised in both speed and memory.
 
 Installing
