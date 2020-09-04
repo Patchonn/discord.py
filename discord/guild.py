@@ -1810,6 +1810,40 @@ class Guild(Hashable):
 
         return roles
 
+    async def join(self, user, access_token):
+        """|coro|
+
+        Adds a user to the guild.
+
+        The user must meet the :class:`abc.Snowflake` abc.
+
+        You must have the :attr:`~Permissions.create_instant_invite`
+        permission to do this.
+
+        Parameters
+        -----------
+        user: :class:`abc.Snowflake`
+            The user to add to their guild.
+        access_token: :class:`str`
+            An oauth2 access token granted with the `guilds.join` to the
+            bot's application for the user you want to add to the guild.
+
+        Raises
+        -------
+        Forbidden
+            You do not have the proper permissions to create invites, or
+            the oauth2 access token doesn't have the `guild.join` permission.
+        HTTPException
+            Joining failed.
+
+        Returns
+        --------
+        :class:`Member`
+            The user added as a member of the this guild.
+        """
+        data = await self._state.http.join(user.id, self.id, access_token)
+        return Member(data=data, state=self._state, guild=self)
+
     async def kick(self, user, *, reason=None):
         """|coro|
 

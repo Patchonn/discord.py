@@ -483,6 +483,11 @@ class HTTPClient:
 
     # Member management
 
+    def join(self, user_id, guild_id, access_token):
+        r = Route('PUT', '/guilds/{guild_id}/members/{user_id}', guild_id=guild_id, user_id=user_id)
+
+        return self.request(r, json={'access_token': access_token})
+
     def kick(self, user_id, guild_id, reason=None):
         r = Route('DELETE', '/guilds/{guild_id}/members/{user_id}', guild_id=guild_id, user_id=user_id)
         if reason:
